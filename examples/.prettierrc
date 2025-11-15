@@ -1,0 +1,18 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "plugins": ["@prettier/plugin-pug"],
+  "pugSingleQuote": false,
+  "pugAttributeSeparator": "none",
+  "pugWrapAttributesThreshold": 2,
+  "pugSortAttributes": "asc",
+  "pugEmptyAttributes": "none",
+  "pugIdNotation": "as-is",
+  "pugClassNotation": "as-is"
+}

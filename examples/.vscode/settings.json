@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "[vue]": {
+    "editor.defaultFormatter": "ekqnp.prettylus"
+  },
+  "prettylus.stylusSupremacyConfigFileName": ".stylusrc",
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "emmet.includeLanguages": {
+    "vue": "html"
+  }
+}
