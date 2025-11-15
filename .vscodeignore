@@ -1,5 +1,6 @@
 .vscode/**
 .vscode-test/**
+.cursor/**
 src/**
 scripts/**
 .gitignore
@@ -18,3 +19,5 @@ package-lock.json
 .prettierrc*
 *.log
 .DS_Store
+out/**
+build/**

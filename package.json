@@ -1,9 +1,9 @@
 {
   "name": "prettylus",
   "displayName": "Prettylus",
-  "description": "Seamlessly format Vue SFCs that use Stylus.",
-  "version": "0.3.2",
-  "publisher": "ekqnp",
+  "description": "Seamlessly format Vue SFCs that use Stylus with Stylus Supremacy.",
+  "version": "0.3.4",
+  "publisher": "esw",
   "license": "MIT",
   "engines": {
     "vscode": "^1.106.0"
@@ -32,13 +32,22 @@
     "color": "#EB3C3C",
     "theme": "dark"
   },
+  "main": "dist/main.js",
   "activationEvents": [
     "onLanguage:vue"
   ],
-  "main": "./out/main.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "vue",
+        "extensions": [
+          ".vue"
+        ]
+      }
+    ],
     "configuration": {
-      "title": "prettylus",
+      "type": "object",
+      "title": "%ext.config.title%",
       "properties": {
         "prettylus.stylusSupremacyConfigFileName": {
           "description": "Name of the config file to be used by Stylus Supremacy.",
@@ -46,7 +55,12 @@
           "default": ".stylusrc"
         },
         "prettylus.prettierBaseDirectory": {
-          "description": "Base directory path (relative to workspace root or absolute) where Prettier should resolve its configuration and plugins. If not set, Prettier will resolve from the file being formatted.",
+          "description": "Base directory path (relative to workspace root or absolute) where Prettier should resolve its configuration and plugins. This is where node_modules exists. If not set, Prettier will resolve from the file being formatted.",
+          "type": "string",
+          "default": null
+        },
+        "prettylus.prettierConfigFile": {
+          "description": "Optional path to a specific Prettier config file (relative to workspace root or absolute). If set, this file will be used for config resolution. The prettierBaseDirectory is still used for plugin resolution from node_modules.",
           "type": "string",
           "default": null
         }
@@ -55,33 +69,25 @@
   },
   "scripts": {
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "vscode:prepublish": "rm -rf ./out && npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --external:stylus-supremacy --external:prettier --external:@prettier/plugin-pug --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "package": "vsce package",
+    "compile": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --external:stylus-supremacy --external:prettier --external:@prettier/plugin-pug --format=cjs --platform=node --sourcemap",
+    "watch": "npm run compile -- --watch",
+    "build": "rm -rf ./dist && esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --external:stylus-supremacy --external:prettier --external:@prettier/plugin-pug --format=cjs --platform=node --minify",
+    "vscode:prepublish": "npm run build",
+    "package": "mkdir -p build && vsce package --out build/",
     "install": "npm run package && node scripts/install-vsix.js",
     "release": "vsce publish"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
     "@types/vscode": "^1.106.0",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
-    "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.7.0",
     "esbuild": "^0.27.0",
     "eslint": "^9.39.1",
-    "glob": "^11.0.3",
-    "mocha": "^11.7.5",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
+    "stylus-supremacy": "^4.0.0",
+    "typescript": "^5.9.3",
     "@prettier/plugin-pug": "^3.4.2",
-    "lru-cache": "^11.2.2",
-    "prettier": "^3.6.2",
-    "stylus-supremacy": "^4.0.0"
+    "prettier": "^3.6.2"
   }
 }
