@@ -3,7 +3,7 @@
   "displayName": "Prettylus",
   "description": "Seamlessly format Vue SFCs that use Stylus with Stylus Supremacy.",
   "version": "0.3.4",
-  "publisher": "esw",
+  "publisher": "ekqnp",
   "license": "MIT",
   "engines": {
     "vscode": "^1.106.0"
